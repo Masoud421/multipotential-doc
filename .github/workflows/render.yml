@@ -35,10 +35,8 @@ jobs:
 
       # 5. Run Remotion render
       - name: Render MP4
-        env:
-          # Ensure ffmpeg is available (Playwright install includes it on ubuntu-latest)
-          # No additional setup needed - Playwright brings Chromium with ffmpeg support
         run: |
+          # ffmpeg is available via Playwright install on ubuntu-latest
           npx remotion render src/index-doc.ts MultipotentialDoc out/multipotential-doc.mp4 --codec=h264 --crf=20
 
       # 6. Upload the rendered video as an artifact
