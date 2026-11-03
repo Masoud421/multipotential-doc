@@ -1,0 +1,23 @@
+{
+  "name": "multipotential-doc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render src/index-doc.ts MultipotentialDoc out/multipotential-doc.mp4 --codec=h264 --crf=20",
+    "preview": "remotion render src/index-doc.ts MultipotentialDoc out/preview.mp4 --frames=0-1199 --codec=h264 --crf=23",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^3.3.103"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^3.3.103",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.4.0"
+  }
+}

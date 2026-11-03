@@ -1,0 +1,50 @@
+name: Render Multipotential Documentary
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js (LTS version)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      # 4. Install Playwright browsers (provides Chromium for Remotion)
+      - name: Install Playwright browsers
+        run: |
+          npx playwright install --with-deps
+
+      # 5. Run Remotion render
+      - name: Render MP4
+        env:
+          # Ensure ffmpeg is available (Playwright install includes it on ubuntu-latest)
+          # No additional setup needed - Playwright brings Chromium with ffmpeg support
+        run: |
+          npx remotion render src/index-doc.ts MultipotentialDoc out/multipotential-doc.mp4 --codec=h264 --crf=20
+
+      # 6. Upload the rendered video as an artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: multipotential-doc.mp4
+          path: out/multipotential-doc.mp4
+          retention-days: 7

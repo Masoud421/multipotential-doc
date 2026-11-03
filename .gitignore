@@ -1,0 +1,16 @@
+# Node modules
+node_modules/
+
+# Remotion output
+out/
+*.mp4
+*.png
+
+# Remotion studio cache
+.rstudio/
+
+# Environment variables
+.env
+# Large audio files (exceed GitHub 100MB limit)
+public/audio/sfx.wav
+public/voice.wav
