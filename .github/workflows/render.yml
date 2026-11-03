@@ -23,17 +23,7 @@ jobs:
         with:
           node-version: '20'
 
-      # 3. Install dependencies
-      - name: Install dependencies
-        run: |
-          npm ci
-
-      # 4. Install Playwright browsers (provides Chromium for Remotion)
-      - name: Install Playwright browsers
-        run: |
-          npx playwright install --with-deps
-
-      # 5. Install ffmpeg (Remotion v3 needs explicit ffmpeg)
+      # 4. Install ffmpeg (Remotion v3 needs explicit ffmpeg)
       - name: Install ffmpeg
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg
