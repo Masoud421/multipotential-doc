@@ -33,10 +33,14 @@ jobs:
         run: |
           npx playwright install --with-deps
 
-      # 5. Run Remotion render
+      # 5. Install ffmpeg (Remotion v3 needs explicit ffmpeg)
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      # 6. Run Remotion render
       - name: Render MP4
         run: |
-          # ffmpeg is available via Playwright install on ubuntu-latest
           npx remotion render src/index-doc.ts MultipotentialDoc out/multipotential-doc.mp4 --codec=h264 --crf=20
 
       # 6. Upload the rendered video as an artifact
